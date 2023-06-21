@@ -1,0 +1,78 @@
+/* These styles are just to make it easier to see the blocks, initially. */
+
+
+*:not(#musicc) {
+	margin-top: auto;
+	margin-left: auto;
+	margin-right: auto;
+	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+#musicc {
+	left: 0 px;
+}
+h1 {
+	font-size: 30px;
+}
+
+body {
+	font-family: monospace;
+	margin: 0;
+	padding: 0;
+	font: white;
+	background-color: rgb(44, 39, 39);
+	overscroll-behavior: contain;
+}
+
+  .wrapper {
+	height: 100vh;
+	background-size: cover;
+	position: relative;
+	overflow: scroll;
+  }
+
+  
+  .shadow {
+	position: fixed;
+	width: 200vw;
+	height: 200vh;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	background-image: radial-gradient(circle at center, transparent, #000 10%);
+  }
+
+a {
+	color: royalblue;
+}
+
+section,
+figure {
+	margin-top: 80px;
+	max-width: 600px;
+}
+
+#channel-description > *,
+figure > *:not(:first-child),
+.description > *:not(:first-child),
+.content > *:not(:first-child) {
+	display: block;
+	margin-top: 1em;
+	color: white;
+}
+
+img {
+	height: 400px;
+	width: 400px;
+}
+
+.img:nth-child(even) {
+	left: 200px;
+}
+
+.title {
+	left: 300px;
+}
+
+
+/* Clear them out once you’ve got your channel plugged in! */

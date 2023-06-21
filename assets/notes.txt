@@ -1,0 +1,253 @@
+Ideas: 
+-- Romance/Crushing. The bloosom of love? Or maybe the hopelessness,
+desperation, nervousness, or sadness that can come with having a crush?
+
+-- Friendship? Maybe get Randy and Jack to add to it and I make a website to show 
+our ideas overlapping. 
+
+-- Queer (Black?) love? It is pride month. I can combine this with the first one
+
+Outline:
+Final Idea:
+Crushing as a queer person.
+
+Details:
+-- Start as a child, getting your first crush
+-- What colors does this feel like?
+    > Orange
+    > Pink
+    > Yellow
+    > White
+    > Light Green
+    > As a child, your confused. You get new feelings that you don't understand
+    > People tell you what your supposed to be like, but don't fit exactly
+-- Next, Adolosence
+-- Colors
+    > Hot Pink
+    > Red/Crimson
+    > Black
+    > Yellow
+    > Green
+-- Adult
+-- Colors
+    > Brown
+    > Black
+    > Red
+    > Green
+-- I put green in each one to signfy fun, but standing out. This is so common for queer people to 
+feel like their love stands out. That their love does not fit into society
+-- I am confused on my structure. I thought child, teen, and adult progression made the most sense,
+but its hard to tell that story and really hone in on queer ideas.
+-- Below Ill do other ideas I want to include, but don't constrict them to timeline. Afterwards, 
+I can see how they fit together? Or if I should pivot idea/structure?
+
+
+-- "Why am I like this?"
+    > This idea that most queer people go through of "Why am I like this"
+    > "Why am I like this?" song by Orla Gartland
+    > Heartstopper
+    > Girl toys vs boy toys (Barbie)
+    > Nail polish
+    > Bullying
+
+-- Crushing
+    > "Will they like me back"
+    > Danger ~ people can react badly to your crush
+    > Friends? ~ will you lose your friend by admitting your crush
+    > The closet ~ "Do I have to come out?"
+    > Holding hands
+    > First dates
+    > School
+    > Internal thoughts
+    > Watching everyone get into relationships
+
+-- Rejection
+    > Can be rejected
+    > Rejection hurts
+    > Rejection from society, not just Romance
+    > Screams
+    > Internal thoughts
+
+-- Falling in love
+    > Hearts 
+    > Red
+    > Valentines day
+    > Watching from sidelines
+
+-- Black Queer love
+    > Happy couples
+    > Kissing
+    > PDA
+    > AIDS fight
+
+-- Childhood
+    > Children being Happy
+    > Kids be gay, but they still are children that enjoy life
+    > Friendship
+    > Kids doing activities that defy gender norms
+    > I want the kids here to look and feel care/worry free
+
+-- I like this section structure more as it centers the mind and internal 
+thoughts of a queer person and their journey with love. I like the idea of starting with 
+the "Why am I like this?" childhood. This is a darker place to start, as lots of queer people 
+remember this period with anxiousness. However, ending again with childhood, but in a positive
+way signifies hope and progress. Kids are kids, and queer kids or kids that don't follow the 
+traditional path should get to experience their childhood without the pressure or expectation 
+that society tries to place on them. I want the ending to show kids being free.
+
+-- With this second structure, I can add in the colors that I got earlier to relay the feeling 
+of those time periods. 
+
+
+-- Should have background a lot of black and dark colors, but when you hover over certain pictures, 
+it puts a bright color in a circle as the background. It has like a glowing affect. The colors is 
+connected to the stages I put earlier. Words will be all black and can only see if you hover over it. 
+May do black or gray words, depending on how hard I want it to be able to see. 
+
+
+// The Description is returned as Markdown, of course.
+let markdownIt = document.createElement('script')
+markdownIt.src = 'https://cdnjs.cloudflare.com/ajax/libs/markdown-it/12.3.2/markdown-it.min.js';
+document.head.appendChild(markdownIt)
+
+const setBasics = (data) => {
+	document.title = data.title
+	document.getElementById('channel-title').innerHTML = data.title
+	document.getElementById('channel-description').innerHTML = window.markdownit().render(data.metadata.description)
+
+	// Add author/collaborators with image/links.
+	// Error proof these.
+}
+
+
+
+const parseBlocks = (data) => {
+	let blocks = [
+		'audioEmbed',
+		'audioFile',
+		'image',
+		'link',
+		'pdf',
+		'text',
+		'videoEmbed',
+		'videoFile',
+	]
+
+	blocks.forEach((type) => {
+		let typeClass = type.replace(/[A-Z]/g, "-$&").toLowerCase()
+		let typeName = type.split(/[A-Z]/g)[0];
+		(typeName == 'pdf') ? typeName = typeName.toUpperCase() : typeName = typeName[0].toUpperCase() + typeName.slice(1)
+
+		let typeContainer = document.querySelector(`.${typeClass}-blocks`)
+		let typeTemplate = document.getElementById(`${typeClass}-block`)
+
+		blocks[type] = {
+			name: typeName,
+			container: typeContainer,
+			template: typeTemplate ? typeTemplate.content : null,
+		}
+	})
+
+	data.contents.slice().reverse().forEach((block) => {
+		switch (block.class) {
+			case 'Attachment':
+				let attachment = block.attachment.content_type
+				if (attachment.includes('audio')) {
+					renderBlock(block, blocks.audioFile)
+				}
+				else if (attachment.includes('pdf')) {
+					renderBlock(block, blocks.pdf)
+				}
+				else if (attachment.includes('video')) {
+					renderBlock(block, blocks.videoFile)
+				}
+				break
+
+			case 'Image':
+				renderBlock(block, blocks.image)
+				break
+
+			case 'Link':
+				renderBlock(block, blocks.link)
+				break
+
+			case 'Media':
+				let media = block.embed.type
+				if (media.includes('rich')) {
+					renderBlock(block, blocks.audioEmbed)
+				}
+				else if (media.includes('video')) {
+					renderBlock(block, blocks.videoEmbed)
+				}
+				break
+
+			case 'Text':
+				renderBlock(block, blocks.text)
+				break
+		}
+	})
+}
+
+
+
+const renderBlock = (block, type) => {
+	if (!type.template || !type.container) return
+
+	let template = type.template.cloneNode(true)
+	let element = [
+		'title',
+		'image',
+		'embed',
+		'audio',
+		'video',
+		'link',
+		'linkTitle',
+		'content',
+		'description',
+		'type',
+	]
+
+	element = Object.assign({},
+		...element.map(type => ({
+			[type]: template.querySelector(`.${type.replace(/[A-Z]/g, "-$&").toLowerCase()}`)
+		}))
+	)
+
+	if (element.title) block.title ? element.title.innerHTML = block.title : element.title.remove()
+	if (element.image) block.image ? element.image.src = block.image.large.url : element.image.remove()
+	if (element.embed) block.embed ? element.embed.innerHTML = block.embed.html : element.embed.remove()
+	if (element.audio) block.attachment ? element.audio.src = block.attachment.url : element.audio.remove()
+	if (element.video) block.attachment ? element.video.src = block.attachment.url : element.video.remove()
+	if (element.link) {
+		if (block.source) {
+			element.link.href = block.source.url
+			if (element.linkTitle) element.linkTitle.innerHTML = block.source.title
+		}
+		else if (block.attachment) {
+			element.link.href = block.attachment.url
+			if (element.linkTitle) element.linkTitle.innerHTML = block.title
+		}
+		else {
+			element.link.remove()
+			element.linkTitle.remove()
+		}
+	}
+	if (element.content) block.content_html ? element.content.innerHTML = block.content_html : element.content.remove()
+	if (element.description) block.description_html ? element.description.innerHTML = block.description_html : element.description.remove()
+	if (element.type) element.type.innerHTML = type.name
+
+	type.container.append(template)
+}
+
+
+
+window.addEventListener('DOMContentLoaded', () => {
+	const channel = document.getElementById('channel-url').href.split('/').filter(Boolean).pop()
+
+	fetch(`https://api.are.na/v2/channels/${channel}?per=100`, {cache: 'no-store'})
+		.then(response => response.json())
+		.then(data => {
+			setBasics(data)
+			parseBlocks(data)
+		})
+});
