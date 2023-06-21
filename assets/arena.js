@@ -186,6 +186,7 @@ function scrollf() {
 	// let m = window.scrollY
 	let a = window.scrollY;
 	a = a + 0.5;
+	console.log(a);
 	window.scroll(window.scrollX, a);
 	if (a < 1999 && a > 420) {
 		body.style.backgroundColor = "yellow";
@@ -207,15 +208,22 @@ function scrollf() {
 		body.style.backgroundColor = "#967bb6"
 	} else if (a > 25400 && a < 32499) {
 		body.style.backgroundColor = "#FFC000"
-	} else if (a > 32500) {
+	} else if (a > 32500 && a < 45399) {
 		body.style.backgroundColor = "#EE408A"
-	} else if (a > 48000) {
-		let a = 1
-		window.scroll(0, a)
-
+	} else if (a > 45400) {
+		a = 1;
+		setTimeout(() => window.scroll(0, a), 3000);
 	} else {
 		body.style.backgroundColor = "#2C272B"
 	}
 };
 
 setTimeout(() => setInterval(scrollf, z), 6000);
+
+function resetpage() {
+	if (window.scrollY > 45000) {
+		location.reload()
+	}
+}
+
+resetpage();
