@@ -209,6 +209,10 @@ function scrollf() {
 		body.style.backgroundColor = "#FFC000"
 	} else if (a > 32500) {
 		body.style.backgroundColor = "#EE408A"
+	} else if (a > 48000) {
+		let a = 1
+		window.scroll(0, a)
+
 	} else {
 		body.style.backgroundColor = "#2C272B"
 	}
