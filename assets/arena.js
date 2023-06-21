@@ -186,7 +186,6 @@ function scrollf() {
 	// let m = window.scrollY
 	let a = window.scrollY;
 	a = a + 0.5;
-	console.log(a);
 	window.scroll(window.scrollX, a);
 	if (a < 1999 && a > 420) {
 		body.style.backgroundColor = "yellow";
