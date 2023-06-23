@@ -40,6 +40,7 @@ body {
 	top: 50%;
 	transform: translateX(-50%) translateY(-50%);
 	background-image: radial-gradient(circle at center, transparent, #000 10%);
+	z-index: 99;
   }
 
 a {
@@ -49,6 +50,9 @@ a {
 section,
 figure {
 	margin-top: 80px;
+}
+figure {
+	position: relative;
 	max-width: 600px;
 }
 
@@ -66,13 +70,13 @@ img {
 	width: 400px;
 }
 
-.img:nth-child(even) {
+/* .img:nth-child(even) {
 	left: 200px;
 }
 
 .title {
 	left: 300px;
-}
+} */
 
 
 /* Clear them out once you’ve got your channel plugged in! */

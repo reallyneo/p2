@@ -14,7 +14,7 @@ function loadDOM() {
         blocks2.forEach(function (element) {
             // do something to each element inside of the blocks array, which is the <figure> tag in the HTML structure.
 
-            const x = Math.random() * 800 + "px"
+            const x = Math.random() * 20 + "vw"
             // Math.random() returns a value between 0 and 1, so it should be multiplied by the max value of the range you want.
             element.style.left = x
             console.log(element.style.left)
