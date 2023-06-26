@@ -217,7 +217,7 @@ function scrollf() {
 	}
 };
 
-setTimeout(() => setInterval(scrollf, z), 10000);
+setTimeout(() => setInterval(scrollf, z), 15000);
 
 function resetpage() {
 	if (window.scrollY > 45000) {
