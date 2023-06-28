@@ -57,7 +57,7 @@ figure {
 }
 figure {
 	position: relative;
-	max-width: 600px;
+	max-width: 400px;
 }
 
 #channel-description > *,
@@ -70,8 +70,7 @@ figure > *:not(:first-child),
 }
 
 img {
-	height: 400px;
-	width: 400px;
+	object-fit: cover;
 }
 
 /* .img:nth-child(even) {
