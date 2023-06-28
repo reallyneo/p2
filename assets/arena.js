@@ -223,6 +223,31 @@ function resetpage() {
 	if (window.scrollY > 45000) {
 		location.reload()
 	}
-}
+};
 
 resetpage();
+
+
+const d = new Date();
+let month = d.getMonth();
+console.log(month)
+
+function gaymonth() {
+	if (month == 5) {
+		body.addEventListener("click", typeWriter);
+	}
+}
+
+gaymonth();
+
+var i = 0;
+var txt = 'Happy Pride!';
+var speed = 50;
+
+function typeWriter() {
+  if (i < txt.length) {
+    document.getElementById("demo").innerHTML += txt.charAt(i);
+    i++;
+    setTimeout(typeWriter, speed);
+  }
+}
